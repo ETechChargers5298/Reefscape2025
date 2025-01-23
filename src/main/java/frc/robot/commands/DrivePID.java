@@ -33,14 +33,14 @@ public class DrivePID extends Command {
     desiredAngleDegrees = tAngleDegrees;
 
     //setup for Distance PID Controller
-    distancePID = new PIDController(1.7, 0.0, 0.0);
+    distancePID = new PIDController(1.2, 0.0, 0.0);
     startDistance = drivetrain.getPose().getX();
     double distanceSetPoint = startDistance + desiredDistanceMeters;
     distancePID.setSetpoint(distanceSetPoint);
     distancePID.setTolerance(0.05);
 
     //setup for Strafe PID Controller
-    strafePID = new PIDController(1.0, 0.0, 0.0);
+    strafePID = new PIDController(1.2, 0.0, 0.0);
     startStrafe = drivetrain.getPose().getY();
     double strafeSetPoint = startStrafe + desiredStrafeMeters;
     strafePID.setSetpoint(strafeSetPoint);
@@ -60,7 +60,8 @@ public class DrivePID extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    drivetrain.stopDrive();
+    drivetrain.stopDrive(); 
+    drivetrain.resetIMU();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -80,7 +81,7 @@ public class DrivePID extends Command {
     double angleSpeed = anglePID.calculate(currentAngle);
 
     //calling drive function
-    drivetrain.setXSpeed(xSpeed);
+    drivetrain.setXSpeed(ySpeed);
 
 
   }
