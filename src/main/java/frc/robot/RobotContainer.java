@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
+import frc.robot.commands.DrivePID;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.SwerveDrive;
 import frc.robot.subsystems.Drivetrain;
@@ -68,6 +69,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return null;
+    return new DrivePID(0, 0, 0);
   }
 }
