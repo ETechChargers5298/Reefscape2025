@@ -5,7 +5,6 @@
 package frc.robot;
 
 import frc.robot.commands.*;
-import frc.robot.commands.Autos;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
@@ -57,8 +56,9 @@ public class RobotContainer {
     m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
   
   // Makes button Y/A Algae Intake/Outake
-  new JoystickButton(operatorController, Button.kY.value).whileTrue(new AlgaeIn());
-  new JoystickButton(operatorController, Button.kA.value).whileTrue(new AlgaeOut());
+  // new JoystickButton(operatorController, Button.kY.value).whileTrue(new AlgaeIn());
+  // new JoystickButton(operatorController, Button.kA.value).whileTrue(new AlgaeOut());
+  new JoystickButton(operatorController, Button.kX.value).whileTrue(new CoralOut());
   
 
   }
