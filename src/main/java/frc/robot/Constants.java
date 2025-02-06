@@ -49,7 +49,7 @@ public final class Constants {
     //Angular Offsets for the radian difference between the calibrated swerve and desired forward direction
     public static final double FL_ANGULAR_OFFSET = -Math.PI/2; //Math.PI / 2; //-Math.PI / 2;
     public static final double FR_ANGULAR_OFFSET = 2 * Math.PI/3;
-    public static final double BR_ANGULAR_OFFSET = Math.PI/2; //Math.PI / 2;
+    public static final double BR_ANGULAR_OFFSET = 11*Math.PI/6; //Math.PI / 2;
     public static final double BL_ANGULAR_OFFSET = 5 * Math.PI/3; //Math.PI;
 
     //Constructor to hold all of the data to configure a SwerveModule
