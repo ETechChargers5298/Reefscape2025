@@ -74,12 +74,12 @@ public class RobotContainer {
     //---------- DRIVETRAIN ----------//
 
    //Driver - LX & LY joysticks for Translation, RX joystick for Strafing, A to reset Robot NavX Heading
-    Drivetrain.getInstance().setDefaultCommand(new SwerveDrive(
-      () -> driverController.getRawAxis(1),
-      () -> driverController.getRawAxis(0),
-      () -> driverController.getRawAxis(4),
-      () -> driverController.getAButton()
-    ));
+    //Drivetrain.getInstance().setDefaultCommand(new SwerveDrive(
+      //() -> driverController.getRawAxis(1),
+      //() -> driverController.getRawAxis(0),
+      //() -> driverController.getRawAxis(4),
+      //() -> driverController.getAButton()
+    //));
 
     // Driver - B - Zero Angle of Field
     // new JoystickButton(driverController, Button.kB.value).toggleOnTrue(new ZeroField());

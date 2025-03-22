@@ -59,7 +59,7 @@ public class Drivetrain extends SubsystemBase {
   // The gyro sensor
   public AHRS navX;
 
-  public PIDController controllerNumberOfRotations = new PIDController(1, 0, 1);
+  public PIDController controllerNumberOfRotations = new PIDController(1.6, 0, 0.001);
 
   // Slew rate filter variables for controlling lateral acceleration
   // private double m_currentRotSpeed = 0.0;
@@ -113,7 +113,7 @@ public class Drivetrain extends SubsystemBase {
     this.driveKinematics = SwerveConstants.DRIVE_KINEMATICS;
 
     this.field = new Field2d();
-    this.fieldCentric = true;
+    this.fieldCentric = false;
     
     var stateStdDevs = VecBuilder.fill(0.1, 0.1, 0.1);
     var visionStdDevs = VecBuilder.fill(1, 1, 1);
@@ -135,11 +135,11 @@ public class Drivetrain extends SubsystemBase {
      * accurate enough, we should be able to command any number of rotations and the mark will end up at the same spot. Make sure at least some of the number of
      * commanded rotations are co-prime, to make sure we can't error that repeat with some regularity.
      */
-    var numrotations = 40;
+    var numrotations = 1;
     var tolerance_deg = 2;
     controllerNumberOfRotations.setSetpoint(numrotations * Constants.SwerveModuleConstants.WHEEL_CIRCUMFERENCE_METERS);
-    controllerNumberOfRotations.setTolerance(Constants.SwerveModuleConstants.WHEEL_CIRCUMFERENCE_METERS * tolerance_deg/360);
-
+    //controllerNumberOfRotations.setTolerance(Constants.SwerveModuleConstants.WHEEL_CIRCUMFERENCE_METERS * tolerance_deg/360);
+    controllerNumberOfRotations.setTolerance(0.002);
   }
 
   //Path Planner Drive Controller
@@ -540,7 +540,8 @@ public class Drivetrain extends SubsystemBase {
      * so make sure to make the mark on that module, and also test the other modules.
      */
     double xspeed = controllerNumberOfRotations.calculate(frontL.getPosition().distanceMeters);
-    move(xspeed, 0, 0, false);
+    //move(xspeed, 0, 0, false);
+    setXSpeed(xspeed);
     /* ===== END ROTATION TESTING CODE ===== */
 
     updatePose();
@@ -567,5 +568,9 @@ public class Drivetrain extends SubsystemBase {
     SmartDashboard.putData("PoseEstimator Field", field);
     SmartDashboard.putBoolean("fieldCentric", fieldCentric);
     SmartDashboard.putNumber("FL distanceMeters", frontL.getPosition().distanceMeters);
+    SmartDashboard.putNumber("BL distanceMeters", backL.getPosition().distanceMeters);
+    SmartDashboard.putNumber("BR distanceMeters", backR.getPosition().distanceMeters);
+    SmartDashboard.putNumber("FR distanceMeters", frontR.getPosition().distanceMeters);
+    SmartDashboard.putNumber("controller error", controllerNumberOfRotations.getError());
   }
 }

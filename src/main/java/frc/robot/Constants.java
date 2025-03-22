@@ -167,7 +167,7 @@ public final class Constants {
     // This changes the drive speed of the module (a pinion gear with more teeth will result in a
     // robot that drives faster).
     public static final double DRIVE_MOTOR_PINION_GEAR_TEETH = 14;
-    public static final double SPUR_GEAR_TEETH = 22; //22 teeth, but has a diameter used for a normal 22t gear
+    public static final double SPUR_GEAR_TEETH = 20; //22 teeth, but has a diameter used for a normal 22t gear
 
     // Invert the turning encoder, since the output shaft rotates in the opposite direction of
     // the steering motor in the MAXSwerve Module.

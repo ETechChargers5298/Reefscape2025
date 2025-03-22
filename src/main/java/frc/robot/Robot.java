@@ -15,6 +15,7 @@ import frc.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.DataLogManager;
 
@@ -102,6 +103,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    Drivetrain.getInstance().resetPose(new Pose2d());
     //Drivetrain.getInstance().navX.setAngleAdjustment(180);
     //Drivetrain.getInstance().resetIMU();
   }
