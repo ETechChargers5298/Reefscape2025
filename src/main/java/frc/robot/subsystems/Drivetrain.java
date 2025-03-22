@@ -11,6 +11,7 @@ import com.studica.frc.AHRS.NavXComType;
 
 import edu.wpi.first.math.Matrix;
 import edu.wpi.first.math.VecBuilder;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -57,6 +58,8 @@ public class Drivetrain extends SubsystemBase {
 
   // The gyro sensor
   public AHRS navX;
+
+  public PIDController controllerNumberOfRotations = new PIDController(1, 0, 1);
 
   // Slew rate filter variables for controlling lateral acceleration
   // private double m_currentRotSpeed = 0.0;
@@ -126,6 +129,16 @@ public class Drivetrain extends SubsystemBase {
 
     autoConfig();
     sysIdConfig();
+    /* If we're off by 0.1" on the wheel diameter, then after 4 rotations (about 1m on a 3.1" diameter wheel) we'll be off by 3.1cm or 1.24", or 7.5 degrees.
+     * After 40 rotations multiply all that by 10 so ~75 degrees off. Mark the bottom of a wheel with a sharpie and run this test and see where the mark ends up.
+     * Adjust the wheel diameter so that the mark ends up where it started. Test this again with different numbers of rotations, because in theory if we're
+     * accurate enough, we should be able to command any number of rotations and the mark will end up at the same spot. Make sure at least some of the number of
+     * commanded rotations are co-prime, to make sure we can't error that repeat with some regularity.
+     */
+    var numrotations = 40;
+    var tolerance_deg = 2;
+    controllerNumberOfRotations.setSetpoint(numrotations * Constants.SwerveModuleConstants.WHEEL_CIRCUMFERENCE_METERS);
+    controllerNumberOfRotations.setTolerance(Constants.SwerveModuleConstants.WHEEL_CIRCUMFERENCE_METERS * tolerance_deg/360);
 
   }
 
@@ -522,6 +535,13 @@ public class Drivetrain extends SubsystemBase {
   // This method will be called once per scheduler run
   @Override
   public void periodic() {
+    /* ===== ROTATION TESTING CODE ===== */
+    /* See comment in the constructor about what this is for. Also note that I've hardcoded a particular module here,
+     * so make sure to make the mark on that module, and also test the other modules.
+     */
+    double xspeed = controllerNumberOfRotations.calculate(frontL.getPosition().distanceMeters);
+    move(xspeed, 0, 0, false);
+    /* ===== END ROTATION TESTING CODE ===== */
 
     updatePose();
     updateModuleTelemetry();
