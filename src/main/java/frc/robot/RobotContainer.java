@@ -149,13 +149,13 @@ public class RobotContainer {
 
 
     // Operator - A - Rotate jaw to Intake Angle
-    new JoystickButton(operatorController, Button.kA.value).whileTrue(new SetJawAngle(MechConstants.JAW_INTAKE_ANGLE));
+    new JoystickButton(operatorController, Button.kA.value).whileTrue(new ElevatorSpitCombo());
 
     //Operator - B - Go to L4, Algae score angle, and spit algae 
-    new JoystickButton(operatorController, Button.kB.value).whileTrue(new ElevatorSpitCombo(ElevatorConstants.ELEVATOR_L4).repeatedly());
+    //new JoystickButton(operatorController, Button.kB.value).whileTrue(new ElevatorSpitCombo(ElevatorConstants.ELEVATOR_L4).repeatedly());
     
     // Operator - RB - Rotate jaw to bring Coral out of the way for a Supercycle
-    new JoystickButton(operatorController, Button.kLeftBumper.value).whileTrue(new SetJawAngle(MechConstants.JAW_UP_ANGLE)); //RB
+    //new JoystickButton(operatorController, Button.kLeftBumper.value).whileTrue(new SetJawAngle(MechConstants.JAW_UP_ANGLE)); //RB
 
     // Operator - B - Rotate Jaw to Starting/Coral Stop Angle
     // new JoystickButton(operatorController, Button.kB.value).whileTrue(new SetJawAngle(MechConstants.JAW_STARTING_ANGLE).repeatedly());

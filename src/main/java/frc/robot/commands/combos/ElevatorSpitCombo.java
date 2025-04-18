@@ -12,10 +12,10 @@ import frc.robot.subsystems.AlgaeHandler;
 public class ElevatorSpitCombo extends ParallelCommandGroup {
     /** Creates a new ElevatorSputCombo */
 
-    public ElevatorSpitCombo(double position) {
+    public ElevatorSpitCombo() {
 
         addCommands(
-            new ElevatorSetPosition(position),
+            //new ElevatorSetPosition(position),
             new SetJawAngle(MechConstants.JAW_INTAKE_ANGLE),
             new AlgaeSpit()
         );

@@ -220,7 +220,7 @@ public class Elevator extends SubsystemBase {
       LEDStrip.request(SubsystemPriority.ELEVATOR, LEDStrip.L3);
     }
 
-    else if (instance.getPosition() > ElevatorConstants.ELEVATOR_L4 - 1 && instance.getPosition() < ElevatorConstants.ELEVATOR_L4 + 1) {
+    else if (instance.getPosition() > ElevatorConstants.ELEVATOR_L4 - 3 && instance.getPosition() < ElevatorConstants.ELEVATOR_L4 + 1) {
       if(CoralScorer.getInstance().hasCoral()) {
         LEDStrip.request(SubsystemPriority.ELCORAL, LEDStrip.SCORE_READY);
       }
