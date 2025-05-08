@@ -144,9 +144,6 @@ public class RobotContainer {
     // new DPad(driverController, 0).whileTrue(new SafeAlgaeJoystick(() -> 0.5));
     // new DPad(driverController, 180).whileTrue(new SafeAlgaeJoystick(() -> -0.5));
 
-    // Driver - ?? - Zero Angle of Algae Handler
-    // new TriggerButton(driverController, 2).whileTrue(new ZeroAlgae());
-
 
     // Operator - A - Rotate jaw to Intake Angle
     new JoystickButton(operatorController, Button.kA.value).whileTrue(new ElevatorSpitCombo());
