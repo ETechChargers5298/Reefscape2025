@@ -107,9 +107,10 @@ public class RobotContainer {
     // int tagId = vision.getClosestId();
     // int tagId = 21;
     // int tagId = 5298;
-    new DPad(driverController,270).whileTrue(new DriveToClosestBranch("LEFT"));
-    new DPad(driverController,180).whileTrue(new DriveToClosestBranch("CENTER"));
-    new DPad(driverController,90).whileTrue(new DriveToClosestBranch("RIGHT")); 
+    //Reassigning DPad to Trigger - Steven P
+    new Trigger(() -> driverController.getPOV() == 270).whileTrue(new DriveToClosestBranch("LEFT"));
+    new Trigger(() -> driverController.getPOV() == 180).whileTrue(new DriveToClosestBranch("CENTER"));
+    new Trigger(() -> driverController.getPOV() == 90).whileTrue(new DriveToClosestBranch("RIGHT"));
 
     new JoystickButton(driverController, Button.kLeftBumper.value).whileTrue(new DriveToClosestBranch("LEFT")); 
     new JoystickButton(driverController, Button.kRightBumper.value).whileTrue(new DriveToClosestBranch("RIGHT")); 
@@ -128,24 +129,24 @@ public class RobotContainer {
     ));
 
     //Operator - DPAD - Elevator to L1, L2, L3, L4 heights
-    new DPad(operatorController,180).whileTrue(new ElevatorSetPosition(ElevatorConstants.ELEVATOR_L1));
-    new DPad(operatorController,270).whileTrue(new ElevatorSetPosition(ElevatorConstants.ELEVATOR_L2));
-    new DPad(operatorController,0).whileTrue(new ElevatorSetPosition(ElevatorConstants.ELEVATOR_L3));
-    new DPad(operatorController,90).whileTrue(new ElevatorSetPosition(ElevatorConstants.ELEVATOR_L4));
+    new Trigger(() -> operatorController.getPOV() == 180).whileTrue(new ElevatorSetPosition(ElevatorConstants.ELEVATOR_L1));
+    new Trigger(() -> operatorController.getPOV() == 270).whileTrue(new ElevatorSetPosition(ElevatorConstants.ELEVATOR_L2));
+    new Trigger(() -> operatorController.getPOV() == 0).whileTrue(new ElevatorSetPosition(ElevatorConstants.ELEVATOR_L3));
+    new Trigger(() -> operatorController.getPOV() == 90).whileTrue(new ElevatorSetPosition(ElevatorConstants.ELEVATOR_L4));
     
     //---------- CORAL INTAKE/ SCORING ----------//
 
     // Driver - RT - Move Elevator in position to Intake + Spin Intake wheels
-    new TriggerButton(driverController, 3).whileTrue(new ElevatorIntakeCombo());        //RT 
+    new Trigger(() -> driverController.getRawAxis(3) >0.7).whileTrue(new ElevatorIntakeCombo());        //RT 
   
     // Operator - LT - Intake Coral with sensors
-    new TriggerButton(operatorController, 2).whileTrue(new CoralInSafe());        //LT    
+    new Trigger(() -> operatorController.getRawAxis(2) >0.7).whileTrue(new CoralInSafe());        //LT    
     
     // Operator - LB - Retract Coral if hanging too far out
     new JoystickButton(operatorController, Button.kLeftBumper.value).whileTrue(new CoralRetract()); //LB
     
     //Operator - RT - Score Coral
-    new TriggerButton(operatorController, 3).whileTrue(new CoralScore()); //RT
+    new Trigger(() -> operatorController.getRawAxis(3) >0.7).whileTrue(new CoralScore()); //RT
     
 
     //---------- ALGAE JAW ----------//
@@ -203,10 +204,10 @@ public class RobotContainer {
     new JoystickButton(sysIdController, Button.kB.value).whileTrue(Drivetrain.getInstance().transD2);
 
     // SYSID - D-PAD - Rot Tests
-    new DPad(sysIdController,180).whileTrue(Drivetrain.getInstance().rotQ1);
-    new DPad(sysIdController,270).whileTrue(Drivetrain.getInstance().rotQ2);
-    new DPad(sysIdController,90).whileTrue(Drivetrain.getInstance().rotD1);
-    new DPad(sysIdController,0).whileTrue(Drivetrain.getInstance().rotD2);
+    new Trigger(() -> sysIdController.getPOV() == 180).whileTrue(Drivetrain.getInstance().rotQ1);
+    new Trigger(() -> sysIdController.getPOV() == 270).whileTrue(Drivetrain.getInstance().rotQ2);
+    new Trigger(() -> sysIdController.getPOV() == 90).whileTrue(Drivetrain.getInstance().rotD1);
+    new Trigger(() -> sysIdController.getPOV() == 0).whileTrue(Drivetrain.getInstance().rotD2);
 
 
 
@@ -258,6 +259,3 @@ public void autoChooserInit() {
     //return new DriveToBranchPID(21, "RIGHT");
   }
 }
-
-
-
