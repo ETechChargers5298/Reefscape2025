@@ -33,9 +33,7 @@ import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.LEDStrip;
 import frc.robot.subsystems.Vision;
-import frc.robot.utils.DPad;
 import frc.robot.utils.Ports;
-import frc.robot.utils.TriggerButton;
 
 
 /**
