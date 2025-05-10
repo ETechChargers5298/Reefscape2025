@@ -269,7 +269,7 @@ public final class Constants {
   public static class VisionConstants{
 
     //Camera Name
-    public static final String CAM1_NAME = "SplashyCam1";
+    public static final String CAM1_NAME = "SplashyCam2";
     public static double CAM1_X_OFFSET_TO_FRONT = -(0.236 + RobotConstants.BUMPER_WIDTH); //cam mounted 12.5" back from front bumper
     public static double CAM1_X_OFFSET_TO_CENTER = CAM1_X_OFFSET_TO_FRONT + RobotConstants.BUMPER_TO_ROBOT_CENTER_DISTANCE;
     public static double CAM1_Y_OFFSET_TO_CENTER =0; //-0.034; //-0.013;
