@@ -1,19 +1,10 @@
 package frc.robot;
 
 
-import frc.robot.Constants.*;
-import frc.robot.utils.*;
-import frc.robot.subsystems.*;
-import frc.robot.commands.basic.*;
-import frc.robot.commands.closed.*;
-import frc.robot.commands.complex.*;
-import frc.robot.commands.combos.*;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.commands.PathPlannerAuto;
 
-import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -21,6 +12,30 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.Constants.ElevatorConstants;
+import frc.robot.commands.basic.CoralRetract;
+import frc.robot.commands.basic.CoralScore;
+import frc.robot.commands.basic.ToggleFieldCentric;
+import frc.robot.commands.closed.DriveToBranchPID;
+import frc.robot.commands.closed.DriveToClosestBranch;
+import frc.robot.commands.closed.ElevatorSetPosition;
+import frc.robot.commands.combos.Auto2Piece;
+import frc.robot.commands.combos.AutoPathToBranchScore;
+import frc.robot.commands.combos.ElevatorIntakeCombo;
+import frc.robot.commands.combos.ElevatorJawCombo;
+import frc.robot.commands.combos.ElevatorSpitCombo;
+import frc.robot.commands.complex.CoralInSafe;
+import frc.robot.commands.complex.SafeAlgaeJoystick;
+import frc.robot.commands.complex.SafeElevatorJoystick;
+import frc.robot.commands.complex.SwerveDrive;
+import frc.robot.subsystems.AlgaeHandler;
+import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.LEDStrip;
+import frc.robot.subsystems.Vision;
+import frc.robot.utils.DPad;
+import frc.robot.utils.Ports;
+import frc.robot.utils.TriggerButton;
 
 
 /**
@@ -174,9 +189,9 @@ public class RobotContainer {
     //new JoystickButton(operatorController, Button.kY.value).whileTrue(new AlgaeEat());
 
     // Operator - X - Spit out the Algae
-    new JoystickButton(operatorController, Button.kX.value).whileTrue(new AlgaeSpit());
+    new JoystickButton(operatorController, Button.kX.value).whileTrue(algae.algaeSpitCommand()); // NEW, MIGHT NOT WORK!!
 
-    new JoystickButton(operatorController, Button.kRightBumper.value).whileTrue(new AlgaeEat());
+    new JoystickButton(operatorController, Button.kRightBumper.value).whileTrue(algae.algaeEatCommand());
 
 
     //---------- SYSID  ----------//
