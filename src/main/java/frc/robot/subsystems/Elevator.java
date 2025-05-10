@@ -188,43 +188,33 @@ public class Elevator extends SubsystemBase {
     // if (instance.getBotLimit()) {
     //   LEDStrip.request(SubsystemPriority.ELEVATOR, LEDStrip.MIN_HEIGHT);
     // }
-    
-    if (instance.getPosition() > 2 && instance.getPosition() < 3.5){
-      if(CoralScorer.getInstance().hasCoral()) {
-        LEDStrip.request(SubsystemPriority.ELCORAL, LEDStrip.SCORE_READY);
-      }
+    boolean IntakeHeight = instance.getPosition() > 2 && instance.getPosition() < 3.5;
+    boolean scoreL1 = instance.getPosition() > ElevatorConstants.ELEVATOR_L1 - 1 && instance.getPosition() < ElevatorConstants.ELEVATOR_L1 + 1;
+    boolean scoreL2 = instance.getPosition() > ElevatorConstants.ELEVATOR_L2 - 1 && instance.getPosition() < ElevatorConstants.ELEVATOR_L2 + 1;
+    boolean scoreL3 = instance.getPosition() > ElevatorConstants.ELEVATOR_L3 - 1 && instance.getPosition() < ElevatorConstants.ELEVATOR_L3 + 1;
+    boolean scoreL4 = instance.getPosition() > ElevatorConstants.ELEVATOR_L4 - 3 && instance.getPosition() < ElevatorConstants.ELEVATOR_L4 + 1;
+    boolean DetectCoral = CoralScorer.getInstance().hasCoral();
 
+    if  (DetectCoral && (IntakeHeight || scoreL1 || scoreL2 || scoreL3 || scoreL4)) {
+      LEDStrip.request(SubsystemPriority.ELCORAL, LEDStrip.SCORE_READY);
+    }
+
+    if (IntakeHeight)  {    
       LEDStrip.request(SubsystemPriority.ELEVATOR, LEDStrip.INTAKE_HEIGHT);
     }
-    else if (instance.getPosition() > ElevatorConstants.ELEVATOR_L1 - 1 && instance.getPosition() < ElevatorConstants.ELEVATOR_L1 + 1) {
-      if(CoralScorer.getInstance().hasCoral()) {
-        LEDStrip.request(SubsystemPriority.ELCORAL, LEDStrip.SCORE_READY);
-      }
-
+    else if (scoreL1) {
       LEDStrip.request(SubsystemPriority.ELEVATOR, LEDStrip.L1);
     }
     
-    else if (instance.getPosition() > ElevatorConstants.ELEVATOR_L2 - 1 && instance.getPosition() < ElevatorConstants.ELEVATOR_L2 + 1) {
-      if(CoralScorer.getInstance().hasCoral()) {
-        LEDStrip.request(SubsystemPriority.ELCORAL, LEDStrip.SCORE_READY);
-      }
-
+    else if (scoreL2) {
       LEDStrip.request(SubsystemPriority.ELEVATOR, LEDStrip.L2);
     }
 
-    else if (instance.getPosition() > ElevatorConstants.ELEVATOR_L3 - 1 && instance.getPosition() < ElevatorConstants.ELEVATOR_L3 + 1) {
-      if(CoralScorer.getInstance().hasCoral()) {
-        LEDStrip.request(SubsystemPriority.ELCORAL, LEDStrip.SCORE_READY);
-      }
-
+    else if (scoreL3) {
       LEDStrip.request(SubsystemPriority.ELEVATOR, LEDStrip.L3);
     }
 
-    else if (instance.getPosition() > ElevatorConstants.ELEVATOR_L4 - 3 && instance.getPosition() < ElevatorConstants.ELEVATOR_L4 + 1) {
-      if(CoralScorer.getInstance().hasCoral()) {
-        LEDStrip.request(SubsystemPriority.ELCORAL, LEDStrip.SCORE_READY);
-      }
-
+    else if (scoreL4) {
       LEDStrip.request(SubsystemPriority.ELEVATOR, LEDStrip.L4);
     }
 
