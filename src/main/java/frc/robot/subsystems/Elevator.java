@@ -29,6 +29,7 @@ public class Elevator extends SubsystemBase {
   private SparkMaxConfig rightMotorConfig;
   private DigitalInput topLimitSwitch;
   private DigitalInput bottomLimitSwitch;
+  private DigitalInput newBottomLimitSwitch;
   private boolean ignore;
 
 
@@ -45,6 +46,7 @@ public class Elevator extends SubsystemBase {
     leftEncoder.setPosition(0);
     topLimitSwitch = new DigitalInput(Ports.DIGITAL_TOP_LIMIT_PORT);
     bottomLimitSwitch = new DigitalInput(Ports.DIGITAL_BOTTOM_LIMIT_PORT);
+    newBottomLimitSwitch = new DigitalInput(9);
 
     ignore = true;
     
@@ -174,6 +176,12 @@ public class Elevator extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    if (!newBottomLimitSwitch.get()) {
+      leftEncoder.setPosition(0);
+      rightEncoder.setPosition(0);
+    }
+
+    SmartDashboard.putBoolean("Elevator limit switch", newBottomLimitSwitch.get());
 
     ignore();
 

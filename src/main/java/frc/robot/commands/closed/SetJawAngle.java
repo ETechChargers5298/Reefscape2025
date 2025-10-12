@@ -25,7 +25,7 @@ public class SetJawAngle extends Command {
         controller.setSetpoint(desiredAngle);
         controller.setTolerance(2);
 
-        addRequirements(handler);
+        // addRequirements(handler);
     }
 
     // Called when the command is initially scheduled.

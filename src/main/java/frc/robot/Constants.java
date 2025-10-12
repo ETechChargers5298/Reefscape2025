@@ -43,10 +43,10 @@ public final class Constants {
   public static class SwerveConstants {
 
     // Sensor Offsets for the radian difference between the physical sensor orientation and the calibrated swerve direction (from REV Hardware Client)
-    public static final double FL_SENSOR_OFFSET = 0.6419399;    
-    public static final double FR_SENSOR_OFFSET = 0.8829775; 
-    public static final double BR_SENSOR_OFFSET = 0.6507399; 
-    public static final double BL_SENSOR_OFFSET = 0.5267535;
+    public static final double FL_SENSOR_OFFSET = -1; //0.6419399;    
+    public static final double FR_SENSOR_OFFSET = -1; //0.8829775; 
+    public static final double BR_SENSOR_OFFSET = -1; //0.6507399; //0.8156442
+    public static final double BL_SENSOR_OFFSET = -1;  //0.5267535;
 
     // Angular Offsets for the radian difference between the calibrated swerve and desired forward direction (based off REV calibration tool)
     public static final double FL_ANGULAR_OFFSET = Math.PI / 2;

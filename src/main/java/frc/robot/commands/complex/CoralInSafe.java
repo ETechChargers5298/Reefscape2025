@@ -35,7 +35,7 @@ public class CoralInSafe extends Command {
   @Override
   public void execute() {
     
-    stop = coralIntake.isGapBlocked() && coralScorer.hasCoral();
+    stop = !coralIntake.isGapBlocked() && coralScorer.hasCoral();
     
     //If coral is completely inside of the scorer then were done intaking 
     if(stop){

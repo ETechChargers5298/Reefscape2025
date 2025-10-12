@@ -29,7 +29,7 @@ public class AlgaeHandler extends SubsystemBase {
     private SparkMax jawMotor;
     private SparkMaxConfig jawConfig;
     private Timer timer;
-    private DigitalInput touchSensor;
+    // private DigitalInput touchSensor;
     private boolean haveAlgae = false;
     //private AbsoluteEncoder encoder;
     private RelativeEncoder jawEncoder;
@@ -53,7 +53,7 @@ public class AlgaeHandler extends SubsystemBase {
         tongueConfig.idleMode(IdleMode.kBrake);
         tongueMotor.configure(tongueConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
-        touchSensor = new DigitalInput(Ports.DIGITAL_ALGAEHANDLER_PORT);
+        // touchSensor = new DigitalInput(Ports.DIGITAL_ALGAEHANDLER_PORT);
 
     }
 
@@ -103,11 +103,11 @@ public class AlgaeHandler extends SubsystemBase {
     }
 
     public boolean checkAlgae() {
-        if (touchSensor.get()) {
+        // if (touchSensor.get()) {
             haveAlgae = true;
-        } else {
+        // } else {
             haveAlgae = false;
-        }
+        // }
         return haveAlgae;
     }
 

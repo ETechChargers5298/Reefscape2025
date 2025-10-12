@@ -104,21 +104,21 @@ public class AprilCam {
     // }
 
     // Gets a target object for a specific AprilTag
-    public PhotonTrackedTarget getDesiredTarget(int desiredTargetId){
+    public PhotonTrackedTarget getDesiredTarget(int desiredTargetId) {
 
         //look at each target in the arraylist of targets
         if(getTargets() != null){
-        for (PhotonTrackedTarget t: getTargets())
-        {
-            //look for the target with the desired Id
-            if (t.getFiducialId() == desiredTargetId)
+            for (PhotonTrackedTarget t: getTargets())
             {
-                return t;
+                //look for the target with the desired Id
+                if (t.getFiducialId() == desiredTargetId)
+                {
+                    return t;
+                }
             }
         }
-    }
         //return null if you can't find the desiredTarget
-        System.out.println("HELPPPPPPPPP");
+        System.out.println("AprilCam cannot find desired target " + desiredTargetId);
         return null;
     }
 
